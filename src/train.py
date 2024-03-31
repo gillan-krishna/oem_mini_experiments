@@ -24,6 +24,6 @@ if __name__ == '__main__':
         # accumulate_grad_batches=4,
         # enable_checkpointing=True,
         # fast_dev_run=True,
-        # overfit_batches=1
+        overfit_batches=1
     )
     trainer.fit(model=model, datamodule=oem_mini)
