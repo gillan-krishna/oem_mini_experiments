@@ -5,10 +5,10 @@ from networks.UNet import LitUNet
 from torch import Tensor
 
 if __name__ == '__main__':
-    BATCH_SIZE = 1
+    BATCH_SIZE = 8
     pl.seed_everything(42, workers=True)
-    class_weights = Tensor([0.9829, 0.7839, 0.8128, 0.9326, 0.8154, 0.9614, 0.8843, 0.8267])
-    model = LitUNet(arch="unetplusplus", encoder_name="resnet18", attention=True, lr=3e-3, focal_weights=class_weights)
+    class_weights = Tensor([0.9829, 0.7839, 0.8128, 0.9326, 0.8154, 0.9614, 0.8843, 0.8267]).cuda()
+    model = LitUNet(arch="unetplusplus", encoder_name="resnet18", attention=True, lr=3e-4, focal_weights=class_weights)
     oem_mini = OEMMiniDataLoader(batch_size=BATCH_SIZE, num_classes=9)
     neptune_logger = NeptuneLogger(
         project='gillan-k/mini-oem',
@@ -17,13 +17,14 @@ if __name__ == '__main__':
     )
 
     trainer = pl.Trainer(
-        # logger=neptune_logger,
-        # accelerator="gpu",
+        logger=neptune_logger,
+        accelerator="gpu",
         deterministic=True,
+        max_epochs=500,
         # profiler="pytorch",
-        # accumulate_grad_batches=4,
+        accumulate_grad_batches=4,
         # enable_checkpointing=True,
         # fast_dev_run=True,
-        overfit_batches=1
+        # overfit_batches=1,
     )
-    trainer.fit(model=model, datamodule=oem_mini)
+    trainer.fit(model=model, datamodule=oem_mini, ckpt_path='/home/ubuntu/hrl/oem_mini_experiments/.neptune/Untitled/MIN-39/checkpoints/epoch=124-step=2625.ckpt')

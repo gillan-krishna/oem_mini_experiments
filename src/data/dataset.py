@@ -77,7 +77,7 @@ class OEMMiniDataLoader(pl.LightningDataModule):
         super().__init__()
         self.save_hyperparameters()
         self.BATCH_SIZE = batch_size
-        self.OEM_DATA_DIR = '/home/gillan/oem_mini_experiments/data/processing/OpenEarthMap_Mini'
+        self.OEM_DATA_DIR = '/home/ubuntu/hrl/oem_mini_experiments/data/processing/OpenEarthMap_Mini'
         self.TRAIN_LIST = os.path.join(self.OEM_DATA_DIR, "train.txt")
         self.VAL_LIST = os.path.join(self.OEM_DATA_DIR, "val.txt")
         
@@ -103,7 +103,7 @@ class OEMMiniDataLoader(pl.LightningDataModule):
             self.OEM_val = OEMMiniDataset(img_list=val_fns, augm=val_augm)
         
     def train_dataloader(self):
-        return DataLoader(dataset=self.OEM_train, batch_size=self.BATCH_SIZE, num_workers=2, shuffle=True)
+        return DataLoader(dataset=self.OEM_train, batch_size=self.BATCH_SIZE, shuffle=True)
         
     def val_dataloader(self):
-        return DataLoader(dataset=self.OEM_val, batch_size=self.BATCH_SIZE, num_workers=2)
+        return DataLoader(dataset=self.OEM_val, batch_size=self.BATCH_SIZE)

@@ -7,6 +7,6 @@ def compile_data(DATA_ZIP:Path, OUTPATH:Path):
     
 
 if __name__ == '__main__':
-    DATA_ZIP = Path('data/raw/OpenEarthMap_Mini.zip')
+    DATA_ZIP = Path('/home/ubuntu/hrl/oem_mini_experiments/data/raw/OpenEathMap_Mini.zip')
     OUTPATH = Path('data/processing')
     compile_data(DATA_ZIP=DATA_ZIP, OUTPATH=OUTPATH)
