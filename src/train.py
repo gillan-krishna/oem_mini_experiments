@@ -27,4 +27,4 @@ if __name__ == '__main__':
         # fast_dev_run=True,
         # overfit_batches=1,
     )
-    trainer.fit(model=model, datamodule=oem_mini, ckpt_path='/home/ubuntu/hrl/oem_mini_experiments/.neptune/Untitled/MIN-39/checkpoints/epoch=124-step=2625.ckpt')
+    trainer.fit(model=model, datamodule=oem_mini, ckpt_path='/home/ubuntu/hrl/oem_mini_experiments/.neptune/Untitled/MIN-39/checkpoints/epoch=175-step=3696.ckpt')
